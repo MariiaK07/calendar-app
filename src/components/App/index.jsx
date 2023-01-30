@@ -92,7 +92,7 @@ const App = () => {
 
   useEffect(() => {
     const savedEvents = localStorage.getItem('events');
-    const localEvents = savedEvents && JSON.parse(savedEvents);
+    const localEvents = JSON.parse(savedEvents) || [];
 
     const currentMonthEvents = localEvents.filter(event =>
       event.date > startDateQuery &&
