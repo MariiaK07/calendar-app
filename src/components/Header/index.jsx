@@ -1,11 +1,11 @@
 import styled from 'styled-components';
-import { Plus, Calendar } from '@styled-icons/bootstrap';
+import { Calendar } from '@styled-icons/bootstrap';
 import { ArrowIosBackOutline, ArrowIosForwardOutline } from '@styled-icons/evaicons-outline';
 
 
 const DivWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   padding: 16px;
   background-color: #1E1F21;
@@ -32,31 +32,25 @@ const TextWrapper = styled.span`
   font-size: 1.2rem;
 `;
 
-const PlusIcon = styled(Plus)`
-  margin-left: -6px;
-`;
-
 
 const Header = (props) => {
   const {
-    today,
+    date,
     prevMonthHandler,
     nextMonthHandler,
     currentMonthHandler
   } = props;
 
+
   return (
     <DivWrapper>
-      <Button>
-        <PlusIcon size="32" />
-      </Button>
       <FlexWrapper gap="8px">
         <FlexWrapper>
           <Button onClick={prevMonthHandler}>
             <ArrowIosBackOutline size="24" />
           </Button>
           <TextWrapper>
-            {today.format('MMMM')} {today.format('YYYY')}
+            {date.format('MMMM')} {date.format('YYYY')}
           </TextWrapper>
           <Button onClick={nextMonthHandler}>
             <ArrowIosForwardOutline size="24" />
