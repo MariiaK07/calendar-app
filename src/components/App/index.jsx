@@ -100,7 +100,7 @@ const App = () => {
     );
 
     setEvents(currentMonthEvents);
-  }, [startDateQuery, endDateQuery]);
+  }, [startDateQuery, endDateQuery, date]);
 
   useEffect(() => {
     localStorage.setItem('events', JSON.stringify(events))
