@@ -2,7 +2,7 @@
   "name": "calendar-app",
   "version": "0.1.0",
   "homepage": "https://mariiak07.github.io/calendar-app",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@styled-icons/bootstrap": "^10.47.0",
     "@styled-icons/evaicons-outline": "^10.46.0",
