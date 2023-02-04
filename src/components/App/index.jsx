@@ -78,64 +78,33 @@ const App = () => {
     defaultEvent.id = moment().format('X');
   };
 
-  const changeEventHandler = (text, field) => {
-    setEvent(prev => ({
-      ...prev,
-      [field]: text
-    }))
-  };
-
-  const saveEvent = (eventId) => {
-    setOpenForm(false);
-
-    event.title && setEvents(prevEvents => {
-      const existedEvent = prevEvents.find(prevEvent => prevEvent.id === eventId);
-
-      if (existedEvent) {
-        return prevEvents.map(prevEvent => {
-          if (prevEvent === existedEvent) {
-            return event;
-          }
-
-          return prevEvent;
-        })
-      }
-
-      return ([
-        ...prevEvents,
-        event
-      ]);
-    });
-
-    setEvent(null);
-  };
-
 
   return (
     <>
       {openForm && (
         <Form
           event={event}
-          saveEvent={saveEvent}
+          events={events}
+          setEvent={setEvent}
+          setEvents={setEvents}
           setOpenForm={setOpenForm}
-          changeEventHandler={changeEventHandler}
         />
       )}
       <ShadowWrapper>
-      <Header
-        date={date}
-        prevMonthHandler={prevMonthHandler}
-        nextMonthHandler={nextMonthHandler}
-        currentMonthHandler={currentMonthHandler}
-      />
-      <CalendarGrid
-        totalDays={totalDays}
-        startDay={startDay}
-        date={date}
-        events={currentMonthEvents}
-        openFormHandler={openFormHandler}
-      />
-    </ShadowWrapper>
+        <Header
+          date={date}
+          prevMonthHandler={prevMonthHandler}
+          nextMonthHandler={nextMonthHandler}
+          currentMonthHandler={currentMonthHandler}
+        />
+        <CalendarGrid
+          totalDays={totalDays}
+          startDay={startDay}
+          date={date}
+          events={currentMonthEvents}
+          openFormHandler={openFormHandler}
+        />
+      </ShadowWrapper>
     </>
   );
 };

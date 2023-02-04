@@ -1,11 +1,11 @@
 import styled from 'styled-components';
-import { Calendar } from '@styled-icons/bootstrap';
+import { Calendar, Plus } from '@styled-icons/bootstrap';
 import { ArrowIosBackOutline, ArrowIosForwardOutline } from '@styled-icons/evaicons-outline';
 
 
 const DivWrapper = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   padding: 16px;
   background-color: #1E1F21;
@@ -44,6 +44,9 @@ const Header = (props) => {
 
   return (
     <DivWrapper>
+      <Button>
+        <Plus size="32" />
+      </Button>
       <FlexWrapper gap="8px">
         <FlexWrapper>
           <Button onClick={prevMonthHandler}>
