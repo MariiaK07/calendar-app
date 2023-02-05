@@ -23,6 +23,8 @@ const CellWrapper = styled.div`
 
   ${props => props.isCurrentDay && `
     background-color: #F55C47;
+    color: #1E1F21;
+    font-weight: 600;
   `}
 `;
 
@@ -31,14 +33,12 @@ const DayWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   margin: 3px 4px;
-  color: ${props => props.isCurrentDay && `#1E1F21`};
-  font-weight: ${props => props.isCurrentDay && `600`};
   line-height: 1;
 `;
 
 const List = styled.ul`
   margin: 0;
-  padding: 3px 4px 4px;
+  padding: 3px 4px;
   list-style-position: inside;
   list-style-type: none;
 `;
@@ -86,7 +86,6 @@ const CalendarGrid = (props) => {
       {daysMap.map((dayItem) => (
         <CellWrapper
           key={dayItem.unix()}
-          isWeekend={dayItem.day() === 6 || dayItem.day() === 0}
           isSelectedMonth={isSelectedMonth(dayItem)}
           isCurrentDay={isCurrentDay(dayItem)}
           onClick={(e) => openFormHandler(e, undefined, dayItem.format('X'))}

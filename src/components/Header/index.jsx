@@ -1,6 +1,8 @@
 import styled from 'styled-components';
-import { Calendar, Plus } from '@styled-icons/bootstrap';
+import moment from 'moment';
+import { Plus } from '@styled-icons/bootstrap';
 import { ArrowIosBackOutline, ArrowIosForwardOutline } from '@styled-icons/evaicons-outline';
+import DatePicker from '../DatePicker';
 
 
 const DivWrapper = styled.div`
@@ -21,6 +23,7 @@ const FlexWrapper = styled.div`
 const Button = styled.button`
   width: 32px;
   height: 32px;
+  padding: 0;
   border: none;
   background-color: transparent;
   color: #E6E6E6;
@@ -36,18 +39,19 @@ const TextWrapper = styled.span`
 const Header = (props) => {
   const {
     date,
+    setDate,
     prevMonthHandler,
     nextMonthHandler,
-    currentMonthHandler
+    openFormHandler
   } = props;
 
 
   return (
     <DivWrapper>
-      <Button>
+      <Button onClick={(e) => openFormHandler(e, undefined, moment().format('X'))}>
         <Plus size="32" />
       </Button>
-      <FlexWrapper gap="8px">
+      <FlexWrapper gap="16px">
         <FlexWrapper>
           <Button onClick={prevMonthHandler}>
             <ArrowIosBackOutline size="24" />
@@ -59,9 +63,7 @@ const Header = (props) => {
             <ArrowIosForwardOutline size="24" />
           </Button>
         </FlexWrapper>
-        <Button onClick={currentMonthHandler}>
-          <Calendar size="18" />
-        </Button>
+        <DatePicker date={date} setDate={setDate} />
       </FlexWrapper>
     </DivWrapper>
   );

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
+import moment from 'moment';
 import {Trash3 } from '@styled-icons/bootstrap';
 
 
@@ -19,7 +20,7 @@ const FormPositionWrapper = styled.div`
 const FormWrapper = styled.form`
   display: flex;
   flex-direction: column;
-  justify-content-center;
+  justify-content: center;
   width: 320px;
   background-color: #1E1F21;
   color: #DDDDDD;
@@ -155,6 +156,11 @@ const Form = (props) => {
           value={event.description}
           placeholder="Description"
           onChange={(e) => changeEventHandler(e.target.value, 'description')}
+        />
+        <Input
+          type="date"
+          onChange={(e) => changeEventHandler(moment(e.target.value).format('X'), 'date')}
+          value={moment.unix(event.date).format('YYYY[-]DD[-]MM')}
         />
         <ButtonsWrapper>
           <IconButton

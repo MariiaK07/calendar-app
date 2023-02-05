@@ -66,10 +66,6 @@ const App = () => {
     setDate(prev => prev.clone().add(1, 'month'));
   };
 
-  const currentMonthHandler = () => {
-    setDate(moment());
-  };
-
   const openFormHandler = (e, eventToUpdate = defaultEvent, date) => {
     e.stopPropagation();
     setOpenForm(true);
@@ -93,9 +89,10 @@ const App = () => {
       <ShadowWrapper>
         <Header
           date={date}
+          setDate={setDate}
           prevMonthHandler={prevMonthHandler}
           nextMonthHandler={nextMonthHandler}
-          currentMonthHandler={currentMonthHandler}
+          openFormHandler={openFormHandler}
         />
         <CalendarGrid
           totalDays={totalDays}
