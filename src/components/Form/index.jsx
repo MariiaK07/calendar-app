@@ -1,77 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import styled from 'styled-components';
 import moment from 'moment';
+import * as Styled from './style';
 import {Trash3 } from '@styled-icons/bootstrap';
-
-
-const FormPositionWrapper = styled.div`
-  z-index: 100;
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.35);
-`;
-
-const FormWrapper = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 320px;
-  background-color: #1E1F21;
-  color: #DDDDDD;
-  border-radius: 8px;
-  border-top: 1px solid #737374;
-  border-left: 1px solid #464648;
-  border-right: 1px solid #464648;
-  border-bottom: 2px solid #464648;
-  overflow: hidden;
-`;
-
-const Input = styled.input`
-  padding: 16px 14px;
-  font-size: .85rem;
-  width: 100%;
-  border: unset;
-  background-color: #1E1F21;
-  color: #DDDDDD;
-  outline: unset;
-  border-bottom: 1px solid ${props => props.showMessage ? '#F55C47' : '#464648'};
-
-  ::placeholder {
-    color: ${props => props.showMessage ? '#F55C47' : '#555759'};
-  }
-`;
-
-const ButtonsWrapper = styled.div`
-  padding: 8px 14px;
-  display: flex;
-  justify-content: flex-end;
-  gap: 8px;
-`;
-
-const Button = styled.button`
-  padding: 4px 26px;
-  border: none;
-  border-radius: 4px;
-  background-color: #F55C47;
-  color: #DDDCDD;
-  cursor: pointer;
-`;
-
-const IconButton = styled.button`
-  display: ${props => props.eventExists ? 'block' : 'none'};
-  width: 32px;
-  height: 32px;
-  background-color: transparent;
-  border: none;
-  color: #DDDCDD;
-  cursor: pointer;
-`;
 
 
 const Form = (props) => {
@@ -143,39 +73,39 @@ const Form = (props) => {
 
 
   return (
-    <FormPositionWrapper onClick={handleBlur}>
-      <FormWrapper onClick={(e) => e.stopPropagation()}>
-        <Input
+    <Styled.FormPositionWrapper onClick={handleBlur}>
+      <Styled.FormWrapper onClick={(e) => e.stopPropagation()}>
+        <Styled.Input
           value={event.title}
           placeholder={showMessage ? 'Title is required' : 'Title'}
           onChange={(e) => changeEventHandler(e.target.value, 'title')}
           ref={inputRef}
           showMessage={showMessage}
         />
-        <Input
+        <Styled.Input
           value={event.description}
           placeholder="Description"
           onChange={(e) => changeEventHandler(e.target.value, 'description')}
         />
-        <Input
+        <Styled.Input
           type="date"
           onChange={(e) => changeEventHandler(moment(e.target.value).format('X'), 'date')}
-          value={moment.unix(event.date).format('YYYY[-]DD[-]MM')}
+          value={moment.unix(event.date).format('YYYY[-]MM[-]DD')}
         />
-        <ButtonsWrapper>
-          <IconButton
+        <Styled.ButtonsWrapper>
+          <Styled.IconButton
             type="button"
             onClick={() => deleteEvent(event.id)}
             eventExists={eventExists(event.id)}
           >
-            <Trash3 />
-          </IconButton>
-          <Button type="submit" onClick={(e) => saveEvent(e, event.id)}>
+            <Trash3 size="20" />
+          </Styled.IconButton>
+          <Styled.Button type="submit" onClick={(e) => saveEvent(e, event.id)}>
             Save
-          </Button>
-        </ButtonsWrapper>
-      </FormWrapper>
-    </FormPositionWrapper>
+          </Styled.Button>
+        </Styled.ButtonsWrapper>
+      </Styled.FormWrapper>
+    </Styled.FormPositionWrapper>
   );
 };
 

@@ -1,68 +1,5 @@
-import styled from 'styled-components';
+import * as Styled from './style';
 import moment from 'moment';
-
-
-const GridWrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: repeat(6, 1fr);
-  grid-gap: 1px;
-  padding-top: 1px;
-  background-color: #404040;
-`;
-
-const CellWrapper = styled.div`
-  width: 144px;
-  height: 96px;
-  background-color: #1E1F21;
-  color: ${props => props.isSelectedMonth ? '#DDDCDD' : '#555759'};
-
-  ${props => props.isWeekend && `
-    background-color: #272829;
-  `}
-
-  ${props => props.isCurrentDay && `
-    background-color: #F55C47;
-    color: #1E1F21;
-    font-weight: 600;
-  `}
-`;
-
-const DayWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 3px 4px;
-  line-height: 1;
-`;
-
-const List = styled.ul`
-  margin: 0;
-  padding: 3px 4px;
-  list-style-position: inside;
-  list-style-type: none;
-`;
-
-const ListItem = styled.li`
-  margin-top: 4px;
-  padding: 4px;
-  line-height: 1;
-  border-radius: 4px;
-  background-color: ${props => props.isCurrentDay
-    ? `rgba(30, 31, 33, 0.5)`
-    : `rgba(245, 92, 71, 0.2)`
-  };
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  cursor: pointer;
-}
-`;
-
-const EllipsisWrapper = styled.p`
-  margin-top: -9px;
-  letter-spacing: 1px;
-`;
 
 
 const CalendarGrid = (props) => {
@@ -82,44 +19,44 @@ const CalendarGrid = (props) => {
 
 
   return (
-    <GridWrapper>
+    <Styled.GridWrapper>
       {daysMap.map((dayItem) => (
-        <CellWrapper
+        <Styled.CellWrapper
           key={dayItem.unix()}
           isSelectedMonth={isSelectedMonth(dayItem)}
           isCurrentDay={isCurrentDay(dayItem)}
           onClick={(e) => openFormHandler(e, undefined, dayItem.format('X'))}
         >
-          <DayWrapper
+          <Styled.DayWrapper
             isCurrentDay={isCurrentDay(dayItem)}
           >
             <span>{dayItem.format('dd')}</span>
             <span>{dayItem.format('D')}</span>
-          </DayWrapper>
+          </Styled.DayWrapper>
 
-          <List>
+          <Styled.List>
             {events
               .filter(event => event.date >= dayItem.format('X') &&
                 event.date <= dayItem.clone().endOf('day').format('X')
               )
               .map((event, index) => (
                 index === 2 ? (
-                  <EllipsisWrapper key={index}>...</EllipsisWrapper>
+                  <Styled.EllipsisWrapper key={index}>...</Styled.EllipsisWrapper>
                 ) : (
-                  <ListItem
+                  <Styled.ListItem
                     key={event.id}
                     onClick={(e) => openFormHandler(e, event)}
                     isCurrentDay={isCurrentDay(dayItem)}
                   >
                     {event.title}
-                  </ListItem>
+                  </Styled.ListItem>
                 )
               ))
             }
-          </List>
-        </CellWrapper>
+          </Styled.List>
+        </Styled.CellWrapper>
       ))}
-    </GridWrapper>
+    </Styled.GridWrapper>
   );
 };
 
