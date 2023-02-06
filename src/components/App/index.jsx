@@ -13,6 +13,13 @@ const defaultEvent = {
   description: '',
 };
 
+
+const getDateFromLocalStorage = () => {
+  const savedDate = localStorage.getItem('date');
+
+  return savedDate > 0 ? moment.unix(savedDate) : moment();
+};
+
 const getEventsFromLocalStorage = () => {
   const savedEvents = localStorage.getItem('events');
   const localEvents = JSON.parse(savedEvents);
@@ -23,9 +30,9 @@ const getEventsFromLocalStorage = () => {
 
 const App = () => {
   moment.updateLocale('en', {week: {dow: 1}});
-  const [date, setDate] = useState(moment());
+  const [date, setDate] = useState(getDateFromLocalStorage);
   const startDay = date.clone().startOf('month').startOf('week');
-  const [events, setEvents] = useState(getEventsFromLocalStorage);
+  const [events, setEvents] = useState(getEventsFromLocalStorage());
   const [event, setEvent] = useState(null);
   const [openForm, setOpenForm] = useState(false);
 
@@ -40,12 +47,14 @@ const App = () => {
 
 
   useEffect(() => {
+    setDate(getDateFromLocalStorage());
     setEvents(getEventsFromLocalStorage());
   }, []);
 
   useEffect(() => {
+    localStorage.setItem('date', date.format('X'));
     localStorage.setItem('events', JSON.stringify(events));
-  }, [events]);
+  }, [date, events]);
 
 
   const prevMonthHandler = () => {
