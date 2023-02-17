@@ -13,7 +13,6 @@ const defaultEvent = {
   description: '',
 };
 
-
 const getDateFromLocalStorage = () => {
   const savedDate = localStorage.getItem('date');
 
@@ -91,7 +90,6 @@ const App = () => {
           setDate={setDate}
           prevMonthHandler={prevMonthHandler}
           nextMonthHandler={nextMonthHandler}
-          openFormHandler={openFormHandler}
         />
         <CalendarGrid
           totalDays={totalDays}

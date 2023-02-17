@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const DivWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   padding: 16px;
   background-color: #1E1F21;

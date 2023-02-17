@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import moment from 'moment';
 import * as Styled from './style';
 import {Trash3 } from '@styled-icons/bootstrap';
 
@@ -86,11 +85,6 @@ const Form = (props) => {
           value={event.description}
           placeholder="Description"
           onChange={(e) => changeEventHandler(e.target.value, 'description')}
-        />
-        <Styled.Input
-          type="date"
-          onChange={(e) => changeEventHandler(moment(e.target.value).format('X'), 'date')}
-          value={moment.unix(event.date).format('YYYY[-]MM[-]DD')}
         />
         <Styled.ButtonsWrapper>
           <Styled.IconButton

@@ -23,6 +23,7 @@ const CalendarGrid = (props) => {
       {daysMap.map((dayItem) => (
         <Styled.CellWrapper
           key={dayItem.unix()}
+          isWeekend={dayItem.day() === 6 || dayItem.day() === 0}
           isSelectedMonth={isSelectedMonth(dayItem)}
           isCurrentDay={isCurrentDay(dayItem)}
           onClick={(e) => openFormHandler(e, undefined, dayItem.format('X'))}

@@ -62,5 +62,6 @@ export const ListItem = styled.li`
 
 export const EllipsisWrapper = styled.p`
   margin-top: -9px;
+  padding-left: 4px;
   letter-spacing: 1px;
 `;
