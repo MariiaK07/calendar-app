@@ -1,7 +1,15 @@
 import * as Styled from './style';
 
 
-const DayEvents = ({ dayItem, events, isCurrentDay, openFormHandler }) => {
+const DayEvents = (props) => {
+  const {
+    dayItem,
+    events,
+    isCurrentDay,
+    openFormHandler
+  } = props;
+
+
   return (
     <Styled.List>
       {events

@@ -17,7 +17,6 @@ const Form = (props) => {
 
   const eventExists = (eventId) => events.find(event => event.id === eventId);
 
-
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
@@ -29,7 +28,7 @@ const Form = (props) => {
     setEvent(prev => ({
       ...prev,
       [field]: text
-    }))
+    }));
   };
 
   const saveEvent = (e, eventId) => {
@@ -94,7 +93,10 @@ const Form = (props) => {
           >
             <Trash3 size="20" />
           </Styled.IconButton>
-          <Styled.Button type="submit" onClick={(e) => saveEvent(e, event.id)}>
+          <Styled.Button
+            type="submit"
+            onClick={(e) => saveEvent(e, event.id)
+          }>
             Save
           </Styled.Button>
         </Styled.ButtonsWrapper>

@@ -7,7 +7,7 @@ const CalendarGrid = (props) => {
   const {
     totalDays,
     startDay,
-    date,
+    targetedDate,
     events,
     openFormHandler
   } = props;
@@ -16,7 +16,7 @@ const CalendarGrid = (props) => {
   const daysMap = [...Array(totalDays)].map(() => day.add(1, 'day').clone());
 
   const isCurrentDay = (day) => moment().isSame(day, 'day');
-  const isSelectedMonth = (day) => date.isSame(day, 'month');
+  const isSelectedMonth = (day) => targetedDate.isSame(day, 'month');
 
 
   return (
@@ -36,12 +36,14 @@ const CalendarGrid = (props) => {
             <span>{dayItem.format('D')}</span>
           </Styled.DayWrapper>
 
-          <DayEvents
-            dayItem={dayItem}
-            events={events}
-            isCurrentDay={isCurrentDay}
-            openFormHandler={openFormHandler}
-          />
+          {events.length > 0 && (
+            <DayEvents
+              dayItem={dayItem}
+              events={events}
+              isCurrentDay={isCurrentDay}
+              openFormHandler={openFormHandler}
+            />
+          )}
         </Styled.CellWrapper>
       ))}
     </Styled.GridWrapper>

@@ -29,8 +29,8 @@ const getEventsFromLocalStorage = () => {
 
 const App = () => {
   moment.updateLocale('en', {week: {dow: 1}});
-  const [date, setDate] = useState(getDateFromLocalStorage);
-  const startDay = date.clone().startOf('month').startOf('week');
+  const [targetedDate, setTargetedDate] = useState(getDateFromLocalStorage());
+  const startDay = targetedDate.clone().startOf('month').startOf('week');
   const [events, setEvents] = useState(getEventsFromLocalStorage());
   const [event, setEvent] = useState(null);
   const [openForm, setOpenForm] = useState(false);
@@ -46,22 +46,25 @@ const App = () => {
 
 
   useEffect(() => {
-    setDate(getDateFromLocalStorage());
+    setTargetedDate(getDateFromLocalStorage());
     setEvents(getEventsFromLocalStorage());
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('date', date.format('X'));
+    localStorage.setItem('date', targetedDate.format('X'));
+  }, [targetedDate]);
+
+  useEffect(() => {
     localStorage.setItem('events', JSON.stringify(events));
-  }, [date, events]);
+  }, [events]);
 
 
   const prevMonthHandler = () => {
-    setDate(prev => prev.clone().subtract(1, 'month'));
+    setTargetedDate(prev => prev.clone().subtract(1, 'month'));
   };
 
   const nextMonthHandler = () => {
-    setDate(prev => prev.clone().add(1, 'month'));
+    setTargetedDate(prev => prev.clone().add(1, 'month'));
   };
 
   const openFormHandler = (e, eventToUpdate = defaultEvent, date) => {
@@ -73,34 +76,32 @@ const App = () => {
   };
 
 
-  return (
-    <>
-      {openForm && (
-        <Form
-          event={event}
-          events={events}
-          setEvent={setEvent}
-          setEvents={setEvents}
-          setOpenForm={setOpenForm}
-        />
-      )}
-      <Styled.ShadowWrapper>
-        <Header
-          date={date}
-          setDate={setDate}
-          prevMonthHandler={prevMonthHandler}
-          nextMonthHandler={nextMonthHandler}
-        />
-        <CalendarGrid
-          totalDays={totalDays}
-          startDay={startDay}
-          date={date}
-          events={currentMonthEvents}
-          openFormHandler={openFormHandler}
-        />
-      </Styled.ShadowWrapper>
-    </>
-  );
+  return <>
+    {openForm && (
+      <Form
+        event={event}
+        events={events}
+        setEvent={setEvent}
+        setEvents={setEvents}
+        setOpenForm={setOpenForm}
+      />
+    )}
+    <Styled.ShadowWrapper>
+      <Header
+        targetedDate={targetedDate}
+        setTargetedDate={setTargetedDate}
+        prevMonthHandler={prevMonthHandler}
+        nextMonthHandler={nextMonthHandler}
+      />
+      <CalendarGrid
+        totalDays={totalDays}
+        startDay={startDay}
+        targetedDate={targetedDate}
+        events={currentMonthEvents}
+        openFormHandler={openFormHandler}
+      />
+    </Styled.ShadowWrapper>
+  </>;
 };
 
 export default App;
