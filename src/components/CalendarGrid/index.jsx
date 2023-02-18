@@ -1,5 +1,6 @@
 import * as Styled from './style';
 import moment from 'moment';
+import DayEvents from '../DayEvents';
 
 
 const CalendarGrid = (props) => {
@@ -35,26 +36,12 @@ const CalendarGrid = (props) => {
             <span>{dayItem.format('D')}</span>
           </Styled.DayWrapper>
 
-          <Styled.List>
-            {events
-              .filter(event => event.date >= dayItem.format('X') &&
-                event.date <= dayItem.clone().endOf('day').format('X')
-              )
-              .map((event, index) => (
-                index === 2 ? (
-                  <Styled.EllipsisWrapper key={index}>...</Styled.EllipsisWrapper>
-                ) : (
-                  <Styled.ListItem
-                    key={event.id}
-                    onClick={(e) => openFormHandler(e, event)}
-                    isCurrentDay={isCurrentDay(dayItem)}
-                  >
-                    {event.title}
-                  </Styled.ListItem>
-                )
-              ))
-            }
-          </Styled.List>
+          <DayEvents
+            dayItem={dayItem}
+            events={events}
+            isCurrentDay={isCurrentDay}
+            openFormHandler={openFormHandler}
+          />
         </Styled.CellWrapper>
       ))}
     </Styled.GridWrapper>
